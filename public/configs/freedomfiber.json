@@ -1,0 +1,80 @@
+{
+    "tenant": {
+        "id": "freedomfiber",
+        "name": "Freedom Fiber",
+        "domain": "freedomfiber.fiberoms.cloud"
+    },
+    "branding": {
+        "logo": "/logos/freedomfiber-logo.png",
+        "favicon": "/favicons/freedomfiber-favicon.ico",
+        "primaryColor": "#1e40af",
+        "secondaryColor": "#dc2626",
+        "accentColor": "#ffffff",
+        "companyName": "Freedom Fiber",
+        "companyAbbr": "FF"
+    },
+    "map": {
+        "bounds": {
+            "xmin": -88.3319638467807,
+            "ymin": 33.440523708494564,
+            "xmax": -87.35488507018964,
+            "ymax": 34.73445506886154
+        },
+        "center": {
+            "longitude": -87.843424458485,
+            "latitude": 34.08748938867805
+        },
+        "basemap": "dark-gray-vector",
+        "basemapLight": "streets-navigation-vector",
+        "basemapDark": "dark-gray-vector",
+        "minZoom": 8,
+        "maxZoom": 12,
+        "pitch": 0,
+        "bearing": 0
+    },
+    "database": {
+        "tables": {
+            "fiber": "mfs",
+            "electric": "freedomfiber_power"
+        },
+        "schema": "public",
+        "filters": {
+            "fiber": {
+                "status": "Offline"
+            }
+        }
+    },
+    "features": {
+        "showElectric": false,
+        "showFiber": true,
+        "enableClustering": true,
+        "enableSearch": true,
+        "enableGeolocation": true,
+        "autoRefresh": true,
+        "refreshInterval": 45000,
+        "enableLayersPanel": true,
+        "enableBasemapSwitcher": true
+    },
+    "clustering": {
+        "enabled": true,
+        "radius": 100,
+        "minSize": 30,
+        "maxSize": 70,
+        "privacyMode": true,
+        "alwaysCluster": true
+    },
+    "ui": {
+        "title": "Freedom Network Status",
+        "counters": {
+            "fiber": "Service Interruptions",
+            "electric": "Power Related"
+        },
+        "theme": "light",
+        "language": "en"
+    },
+    "contact": {
+        "phone": "1-800-FREEDOM-1",
+        "email": "support@freedomfiber.net",
+        "website": "https://freedomfiber.net"
+    }
+}

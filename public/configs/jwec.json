@@ -1,0 +1,65 @@
+{
+  "tenant": {
+    "id": "jwec",
+    "name": "Jackson West Energy Cooperative",
+    "domain": "jwec.fiberoms.cloud"
+  },
+  "branding": {
+    "logo": "/logos/jwec-logo.png",
+    "favicon": "/favicons/jwec-favicon.ico",
+    "primaryColor": "#2563eb",
+    "secondaryColor": "#dc2626",
+    "accentColor": "#ea580c",
+    "companyName": "Jackson West Energy Cooperative",
+    "companyAbbr": "JWEC"
+  },
+  "map": {
+    "bounds": {
+      "xmin": -87.526,
+      "ymin": 34.2596,
+      "xmax": -86.530,
+      "ymax": 34.9244
+    },
+    "center": {
+      "longitude": -87.028,
+      "latitude": 34.592
+    },
+    "basemap": "streets-navigation-vector",
+    "minZoom": 7,
+    "maxZoom": 16,
+    "pitch": 0,
+    "bearing": 0
+  },
+  "database": {
+    "tables": {
+      "fiber": "jwec_offline",
+      "electric": "jwec_electric"
+    },
+    "schema": "public"
+  },
+  "features": {
+    "showElectric": true,
+    "showFiber": true,
+    "enableClustering": true,
+    "enableSearch": true,
+    "enableGeolocation": true,
+    "autoRefresh": true,
+    "refreshInterval": 60000,
+    "enableLayersPanel": true,
+    "enableBasemapSwitcher": true
+  },
+  "ui": {
+    "title": "Fiber & Electric Outage Map",
+    "counters": {
+      "fiber": "Fiber Offline",
+      "electric": "Power Outage"
+    },
+    "theme": "light",
+    "language": "en"
+  },
+  "contact": {
+    "phone": "256-574-3232",
+    "email": "support@jwec.org",
+    "website": "https://jwec.org"
+  }
+}

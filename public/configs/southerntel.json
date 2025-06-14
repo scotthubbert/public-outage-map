@@ -1,0 +1,65 @@
+{
+    "tenant": {
+        "id": "southerntel",
+        "name": "Southern Telecommunications",
+        "domain": "southerntel.fiberoms.cloud"
+    },
+    "branding": {
+        "logo": "/logos/southerntel-logo.png",
+        "favicon": "/favicons/southerntel-favicon.ico",
+        "primaryColor": "#dc2626",
+        "secondaryColor": "#2563eb",
+        "accentColor": "#ea580c",
+        "companyName": "Southern Telecommunications",
+        "companyAbbr": "SouthernTel"
+    },
+    "map": {
+        "bounds": {
+            "xmin": -88.0,
+            "ymin": 33.5,
+            "xmax": -86.5,
+            "ymax": 35.0
+        },
+        "center": {
+            "longitude": -87.25,
+            "latitude": 34.25
+        },
+        "basemap": "streets-navigation-vector",
+        "minZoom": 7,
+        "maxZoom": 16,
+        "pitch": 0,
+        "bearing": 0
+    },
+    "database": {
+        "tables": {
+            "fiber": "southerntel_offline",
+            "electric": "southerntel_electric"
+        },
+        "schema": "public"
+    },
+    "features": {
+        "showElectric": false,
+        "showFiber": true,
+        "enableClustering": true,
+        "enableSearch": true,
+        "enableGeolocation": true,
+        "autoRefresh": true,
+        "refreshInterval": 45000,
+        "enableLayersPanel": true,
+        "enableBasemapSwitcher": true
+    },
+    "ui": {
+        "title": "Network Status Map",
+        "counters": {
+            "fiber": "Service Outages",
+            "electric": "Power Issues"
+        },
+        "theme": "light",
+        "language": "en"
+    },
+    "contact": {
+        "phone": "1-800-SOUTHERN",
+        "email": "support@southerntel.com",
+        "website": "https://southerntel.com"
+    }
+}

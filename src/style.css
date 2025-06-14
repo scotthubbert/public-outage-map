@@ -1,0 +1,363 @@
+/* Global Styles */
+:root {
+  --jwec-red: #dc2626;
+  --jwec-orange: #ea580c;
+  --jwec-blue: #2563eb;
+  --jwec-gray: #6b7280;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+}
+
+#app {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Calcite Shell Styling */
+calcite-shell {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  --calcite-color-foreground-1: #ffffff;
+}
+
+/* Header styling */
+calcite-shell [slot="header"] {
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+/* Counter Styles */
+#counter {
+  padding: 1rem;
+}
+
+.counter-chips {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Map Container */
+#map-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  background-color: #f8f9fa;
+  overflow: hidden;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Logo Styling */
+#map-logo {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 10;
+}
+
+#map-logo img {
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+#map-logo img:hover {
+  transform: scale(1.02);
+}
+
+/* Search Container */
+#search-container {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+  width: 320px;
+}
+
+/* Action Bar Styling */
+calcite-action-bar {
+  --calcite-color-foreground-1: #ffffff;
+  --calcite-color-background: #f8f9fa;
+}
+
+calcite-action {
+  --calcite-color-brand: var(--jwec-blue);
+}
+
+/* Panel Styling */
+calcite-shell-panel[slot="header"] {
+  --calcite-shell-panel-min-height: auto;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+calcite-shell-panel[slot="panel-end"] {
+  --calcite-shell-panel-width: 320px;
+  border-left: 1px solid #e5e7eb;
+}
+
+/* Card Styling */
+calcite-card {
+  margin: 0;
+  --calcite-color-border-3: #e5e7eb;
+}
+
+/* Chip Custom Colors */
+calcite-chip[color="red"] {
+  --calcite-color-brand: var(--jwec-red);
+  --calcite-color-brand-hover: #b91c1c;
+}
+
+calcite-chip[color="orange"] {
+  --calcite-color-brand: var(--jwec-orange);
+  --calcite-color-brand-hover: #c2410c;
+}
+
+/* Radio Button Styling */
+calcite-radio-button-group {
+  width: 100%;
+}
+
+calcite-label[layout="inline"] {
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+/* Alert Styling */
+calcite-alert {
+  --calcite-alert-width: 400px;
+}
+
+/* Loading Indicator */
+calcite-loader {
+  --calcite-color-brand: var(--jwec-blue);
+}
+
+/* Block Styling */
+calcite-block {
+  margin-bottom: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .counter-chips {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  #map-logo img {
+    width: 120px;
+    padding: 6px;
+  }
+
+  #search-container {
+    width: 280px;
+    top: 10px;
+    right: 10px;
+  }
+
+  calcite-shell-panel[slot="header"] {
+    --calcite-shell-panel-min-height: auto;
+  }
+
+  calcite-shell-panel[slot="panel-end"] {
+    --calcite-shell-panel-width: 100vw;
+  }
+
+  calcite-chip {
+    --calcite-chip-spacing-inline: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #counter {
+    padding: 0.5rem;
+  }
+
+  #map-logo {
+    top: 10px;
+    left: 10px;
+  }
+
+  #map-logo img {
+    width: 100px;
+    padding: 4px;
+  }
+
+  #search-container {
+    width: calc(100vw - 130px);
+    top: 8px;
+    right: 8px;
+  }
+
+  .counter-chips calcite-chip {
+    scale: 0.9;
+  }
+}
+
+/* Print Styles */
+@media print {
+  calcite-shell-panel[slot="header"],
+  calcite-action-bar,
+  calcite-shell-panel[slot="panel-end"],
+  #search-container {
+    display: none !important;
+  }
+
+  #map {
+    height: 100vh !important;
+  }
+
+  #map-logo img {
+    background-color: white;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  calcite-chip[color="red"] {
+    --calcite-color-brand: #cc0000;
+  }
+
+  calcite-chip[color="orange"] {
+    --calcite-color-brand: #ff6600;
+  }
+
+  #map-logo img {
+    background-color: white;
+    border: 2px solid #000;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  #map-logo img {
+    transition: none;
+  }
+
+  #map-logo img:hover {
+    transform: none;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --calcite-mode: dark;
+  }
+
+  calcite-shell {
+    --calcite-color-foreground-1: #1f2937;
+    --calcite-color-background: #111827;
+  }
+
+  #map-container {
+    background-color: #111827;
+  }
+
+  #map-logo img {
+    background-color: rgba(31, 41, 55, 0.95);
+    border: 1px solid rgba(75, 85, 99, 0.5);
+  }
+
+  calcite-shell-panel[slot="header"] {
+    border-bottom-color: #374151;
+  }
+
+  calcite-shell-panel[slot="panel-end"] {
+    border-left-color: #374151;
+  }
+
+  calcite-action-bar {
+    --calcite-color-background: #1f2937;
+    --calcite-color-foreground-1: #1f2937;
+  }
+
+  #search-container .esri-search {
+    background-color: rgba(31, 41, 55, 0.95);
+  }
+}
+
+/* Manual dark mode class support */
+.calcite-mode-dark {
+  --calcite-mode: dark;
+}
+
+.calcite-mode-dark calcite-shell {
+  --calcite-color-foreground-1: #1f2937;
+  --calcite-color-background: #111827;
+}
+
+.calcite-mode-dark #map-container {
+  background-color: #111827;
+}
+
+.calcite-mode-dark #map-logo img {
+  background-color: rgba(31, 41, 55, 0.95);
+  border: 1px solid rgba(75, 85, 99, 0.5);
+}
+
+.calcite-mode-dark calcite-shell-panel[slot="header"] {
+  border-bottom-color: #374151;
+}
+
+.calcite-mode-dark calcite-shell-panel[slot="panel-end"] {
+  border-left-color: #374151;
+}
+
+.calcite-mode-dark calcite-action-bar {
+  --calcite-color-background: #1f2937;
+  --calcite-color-foreground-1: #1f2937;
+}
+
+/* Focus Styles for Accessibility */
+calcite-action:focus,
+calcite-button:focus,
+calcite-checkbox:focus,
+calcite-radio-button:focus {
+  outline: 2px solid var(--jwec-blue);
+  outline-offset: 2px;
+}
+
+/* Animation for loading states */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loading {
+  animation: pulse 1.5s ease-in-out infinite;
+}

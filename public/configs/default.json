@@ -1,0 +1,63 @@
+{
+    "tenant": {
+        "id": "default",
+        "name": "ISP Outage Map",
+        "domain": "localhost"
+    },
+    "branding": {
+        "logo": "/logos/default-logo.png",
+        "favicon": "/favicon.ico",
+        "primaryColor": "#2563eb",
+        "secondaryColor": "#dc2626",
+        "accentColor": "#ea580c",
+        "companyName": "Your ISP",
+        "companyAbbr": "ISP"
+    },
+    "map": {
+        "bounds": {
+            "xmin": -180,
+            "ymin": -90,
+            "xmax": 180,
+            "ymax": 90
+        },
+        "center": {
+            "longitude": 0,
+            "latitude": 0
+        },
+        "basemap": "streets-navigation-vector",
+        "minZoom": 2,
+        "maxZoom": 18
+    },
+    "database": {
+        "tables": {
+            "fiber": "offline",
+            "electric": "electric"
+        },
+        "schema": "public"
+    },
+    "features": {
+        "showElectric": true,
+        "showFiber": true,
+        "enableClustering": true,
+        "enableSearch": true,
+        "enableGeolocation": true,
+        "autoRefresh": true,
+        "refreshInterval": 60000,
+        "enableLayersPanel": true,
+        "enableBasemapSwitcher": true
+    },
+    "ui": {
+        "title": "Outage Map",
+        "counters": {
+            "fiber": "Service Outages",
+            "electric": "Power Outages"
+        },
+        "theme": "light",
+        "language": "en"
+    },
+    "contact": {
+        "phone": "555-0123",
+        "email": "support@example.com",
+        "website": "https://example.com"
+    }
+}

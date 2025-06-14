@@ -1,14 +1,52 @@
 {
-  "name": "${PROJECT_NAME}",
+  "name": "multi-tenant-outage-map",
   "version": "1.0.0",
-  "description": "",
-  "main": "dist/index.js",
+  "description": "Multi-tenant ISP Fiber and Electric Outage Map using Vite, ArcGIS, and Calcite UI",
+  "type": "module",
   "scripts": {
-    "build": "tsc"
+    "dev": "vite",
+    "dev:jwec": "VITE_TENANT_ID=jwec vite",
+    "dev:flashfiber": "VITE_TENANT_ID=flashfiber vite",
+    "dev:freedomfiber": "VITE_TENANT_ID=freedomfiber vite",
+    "build": "vite build",
+    "build:prod": "npm run cleanup:prod && vite build",
+    "build:check": "npm run build && npm run preview",
+    "preview": "vite preview",
+    "cleanup:prod": "node scripts/cleanup-for-production.js",
+    "clean": "rm -rf node_modules/.vite dist",
+    "reinstall": "rm -rf node_modules package-lock.json && npm install",
+    "validate:configs": "node scripts/validate-configs.js",
+    "test:setup": "node scripts/test-setup.js",
+    "test:connection": "node scripts/test-tenant-connection.js",
+    "setup:freedomfiber": "node scripts/setup-freedomfiber-env.js",
+    "version:patch": "node scripts/update-version.js patch",
+    "version:minor": "node scripts/update-version.js minor",
+    "version:major": "node scripts/update-version.js major"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@arcgis/core": "^4.32.10",
+    "@esri/calcite-components": "^3.2.1",
+    "@supabase/supabase-js": "^2.49.9"
+  },
   "devDependencies": {
-    "typescript": "^5.5.3"
+    "vite": "^6.3.5",
+    "terser": "^5.36.0"
   },
-  "private": true
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "arcgis",
+    "calcite",
+    "vite",
+    "vanilla-js",
+    "maps",
+    "supabase",
+    "fiber",
+    "outage",
+    "tracking"
+  ],
+  "author": "Scott Hubbert",
+  "license": "MIT"
 }

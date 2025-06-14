@@ -1,0 +1,65 @@
+{
+    "tenant": {
+        "id": "flashfiber",
+        "name": "Flash Fiber",
+        "domain": "flashfiber.fiberoms.cloud"
+    },
+    "branding": {
+        "logo": "/logos/flashfiber-logo.png",
+        "favicon": "/favicons/flashfiber-favicon.ico",
+        "primaryColor": "#7c3aed",
+        "secondaryColor": "#ef4444",
+        "accentColor": "#f59e0b",
+        "companyName": "Flash Fiber",
+        "companyAbbr": "FF"
+    },
+    "map": {
+        "bounds": {
+            "xmin": -88.2,
+            "ymin": 33.8,
+            "xmax": -86.8,
+            "ymax": 35.2
+        },
+        "center": {
+            "longitude": -87.5,
+            "latitude": 34.5
+        },
+        "basemap": "dark-gray-vector",
+        "minZoom": 6,
+        "maxZoom": 18,
+        "pitch": 0,
+        "bearing": 0
+    },
+    "database": {
+        "tables": {
+            "fiber": "flashfiber_outages",
+            "electric": "flashfiber_power"
+        },
+        "schema": "public"
+    },
+    "features": {
+        "showElectric": false,
+        "showFiber": true,
+        "enableClustering": true,
+        "enableSearch": true,
+        "enableGeolocation": true,
+        "autoRefresh": true,
+        "refreshInterval": 30000,
+        "enableLayersPanel": true,
+        "enableBasemapSwitcher": true
+    },
+    "ui": {
+        "title": "Network Status Map",
+        "counters": {
+            "fiber": "Network Outages",
+            "electric": "Power Issues"
+        },
+        "theme": "dark",
+        "language": "en"
+    },
+    "contact": {
+        "phone": "1-800-FLASH-NET",
+        "email": "support@flashfiber.net",
+        "website": "https://flashfiber.net"
+    }
+}

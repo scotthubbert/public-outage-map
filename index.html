@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JWEC - Fiber & Electric Outage Map</title>
+    <meta name="description" content="Real-time fiber and electric outage tracking map for JWEC service area" />
+
+    <!-- Calcite Components CSS -->
+    <link rel="stylesheet" href="https://js.arcgis.com/calcite-components/3.2.1/calcite.css" />
+
+    <!-- ArcGIS CSS -->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.32/esri/themes/light/main.css" />
+</head>
+
+<body>
+    <!-- Main App Container -->
+    <div id="app">
+        <!-- Calcite Shell for layout -->
+        <calcite-shell>
+            <!-- Header Panel with Counter -->
+            <div slot="header">
+                <calcite-panel>
+                    <div id="counter">
+                        <calcite-loader id="loading-indicator" active></calcite-loader>
+                        <div id="counter-content" style="display: none;">
+                            <calcite-card>
+                                <div class="counter-chips">
+                                    <calcite-chip id="fiber-chip" appearance="solid" color="red" scale="l">
+                                        <calcite-icon icon="exclamation-mark-triangle" slot="icon"></calcite-icon>
+                                        <span id="fiber-count">Fiber Offline: 0</span>
+                                    </calcite-chip>
+                                    <calcite-chip id="electric-chip" appearance="solid" color="orange" scale="l">
+                                        <calcite-icon icon="lightbulb" slot="icon"></calcite-icon>
+                                        <span id="electric-count">Power Outage: 0</span>
+                                    </calcite-chip>
+                                </div>
+                            </calcite-card>
+                        </div>
+                    </div>
+                </calcite-panel>
+            </div>
+
+            <!-- Map Container -->
+            <div id="map-container">
+                <div id="map"></div>
+
+                <!-- Logo overlay -->
+                <div id="map-logo">
+                    <img src="/logo-3.png" alt="Flash Fiber Logo">
+                </div>
+
+                <!-- Search Widget Container -->
+                <div id="search-container"></div>
+            </div>
+
+            <!-- Action Bar for Controls -->
+            <calcite-action-bar slot="action-bar">
+                <calcite-action id="home-action" text="Home" icon="home"></calcite-action>
+                <calcite-action id="locate-action" text="My Location" icon="gps-on"></calcite-action>
+                <calcite-action id="refresh-action" text="Refresh Data" icon="refresh"></calcite-action>
+                <calcite-action id="layers-action" text="Toggle Layers" icon="layers"></calcite-action>
+            </calcite-action-bar>
+
+            <!-- Layer Toggle Panel (hidden by default) -->
+            <calcite-shell-panel slot="panel-end" id="layers-panel" hidden>
+                <calcite-panel heading="Map Layers">
+                    <calcite-block expanded heading="Data Layers" description="Toggle layer visibility">
+                        <calcite-label layout="inline">
+                            <calcite-checkbox id="fiber-toggle" checked></calcite-checkbox>
+                            Fiber Offline Points
+                        </calcite-label>
+                        <calcite-label layout="inline">
+                            <calcite-checkbox id="electric-toggle" checked></calcite-checkbox>
+                            Power Outage Points
+                        </calcite-label>
+                    </calcite-block>
+
+                    <calcite-block expanded heading="Basemap" description="Choose map style">
+                        <calcite-radio-button-group id="basemap-group" name="basemap">
+                            <calcite-label layout="inline">
+                                <calcite-radio-button value="streets-navigation-vector" checked></calcite-radio-button>
+                                Streets
+                            </calcite-label>
+                            <calcite-label layout="inline">
+                                <calcite-radio-button value="satellite"></calcite-radio-button>
+                                Satellite
+                            </calcite-label>
+                            <calcite-label layout="inline">
+                                <calcite-radio-button value="hybrid"></calcite-radio-button>
+                                Hybrid
+                            </calcite-label>
+                            <calcite-label layout="inline">
+                                <calcite-radio-button value="dark-gray-vector"></calcite-radio-button>
+                                Dark
+                            </calcite-label>
+                        </calcite-radio-button-group>
+                    </calcite-block>
+                </calcite-panel>
+            </calcite-shell-panel>
+        </calcite-shell>
+
+        <!-- Status Toast -->
+        <calcite-alert id="status-alert" placement="bottom" auto-close auto-close-duration="fast" hidden>
+            <div slot="title">Status Update</div>
+            <div slot="message" id="alert-message"></div>
+        </calcite-alert>
+    </div>
+
+    <!-- Load main application script -->
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+{
+    "tenant": {
+        "id": "centralelectric",
+        "name": "Central Electric Cooperative",
+        "domain": "centralelectric.fiberoms.cloud"
+    },
+    "branding": {
+        "logo": "/logos/centralelectric-logo.png",
+        "favicon": "/favicons/centralelectric-favicon.ico",
+        "primaryColor": "#059669",
+        "secondaryColor": "#dc2626",
+        "accentColor": "#ea580c",
+        "companyName": "Central Electric Cooperative",
+        "companyAbbr": "CEC"
+    },
+    "map": {
+        "bounds": {
+            "xmin": -87.0,
+            "ymin": 34.0,
+            "xmax": -86.0,
+            "ymax": 35.0
+        },
+        "center": {
+            "longitude": -86.5,
+            "latitude": 34.5
+        },
+        "basemap": "streets-navigation-vector",
+        "minZoom": 7,
+        "maxZoom": 16,
+        "pitch": 0,
+        "bearing": 0
+    },
+    "database": {
+        "tables": {
+            "fiber": "centralelectric_offline",
+            "electric": "centralelectric_electric"
+        },
+        "schema": "public"
+    },
+    "features": {
+        "showElectric": true,
+        "showFiber": true,
+        "enableClustering": true,
+        "enableSearch": true,
+        "enableGeolocation": true,
+        "autoRefresh": true,
+        "refreshInterval": 60000,
+        "enableLayersPanel": true,
+        "enableBasemapSwitcher": true
+    },
+    "ui": {
+        "title": "Service Outage Map",
+        "counters": {
+            "fiber": "Fiber Offline",
+            "electric": "Power Outage"
+        },
+        "theme": "light",
+        "language": "en"
+    },
+    "contact": {
+        "phone": "555-CENTRAL",
+        "email": "support@centralelectric.coop",
+        "website": "https://centralelectric.coop"
+    }
+}
