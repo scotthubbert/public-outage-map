@@ -6,7 +6,7 @@
     },
     "branding": {
         "logo": "/logos/freedomfiber-logo.png",
-        "favicon": "/favicons/freedomfiber-favicon.ico",
+        "favicon": "/favicons/ff.ico",
         "primaryColor": "#1e40af",
         "secondaryColor": "#dc2626",
         "accentColor": "#ffffff",
@@ -66,7 +66,7 @@
     "ui": {
         "title": "Freedom Network Status",
         "counters": {
-            "fiber": "Service Interruptions",
+            "fiber": "Fiber Offline",
             "electric": "Power Related"
         },
         "theme": "light",

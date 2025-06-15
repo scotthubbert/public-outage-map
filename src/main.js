@@ -161,33 +161,43 @@ class JWECApp {
     setupSystemTheme() {
         // Initialize theme based on system preference
         const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        if (isDarkTheme) {
-            document.documentElement.classList.add('calcite-mode-dark');
-        } else {
-            document.documentElement.classList.remove('calcite-mode-dark');
-        }
+        this.updateTheme(isDarkTheme);
 
         // Listen for system theme changes
         if (window.matchMedia) {
             const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
             mediaQuery.addListener((e) => {
-                if (e.matches) {
-                    document.documentElement.classList.add('calcite-mode-dark');
-                } else {
-                    document.documentElement.classList.remove('calcite-mode-dark');
-                }
-
-                // Update map theme if MapManager supports it
-                if (this.mapManager && this.mapManager.updateTheme) {
-                    this.mapManager.updateTheme();
-                }
-
-                console.log(`System theme changed to ${e.matches ? 'dark' : 'light'} mode`);
+                this.updateTheme(e.matches);
             });
         }
+    }
 
-        console.log(`System theme initialized: ${isDarkTheme ? 'dark' : 'light'} mode`);
+    updateTheme(isDark) {
+        // Update document class
+        if (isDark) {
+            document.documentElement.classList.add('calcite-mode-dark');
+        } else {
+            document.documentElement.classList.remove('calcite-mode-dark');
+        }
+
+        // Update ArcGIS CSS themes
+        const lightTheme = document.querySelector('link[data-theme="light"]');
+        const darkTheme = document.querySelector('link[data-theme="dark"]');
+
+        if (isDark) {
+            lightTheme.media = 'none';
+            darkTheme.media = '';
+        } else {
+            lightTheme.media = '';
+            darkTheme.media = 'none';
+        }
+
+        // Update map theme if MapManager supports it
+        if (this.mapManager && this.mapManager.updateTheme) {
+            this.mapManager.updateTheme();
+        }
+
+        console.log(`System theme changed to ${isDark ? 'dark' : 'light'} mode`);
     }
 
     async loadData() {
@@ -292,7 +302,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 console.log('📊 Clustering: Disabled for this tenant');
             }
         };
-        window.debugClustering = () => {
+        window.debugClustering = async () => {
             console.log('🏗️  Layer Types:');
             console.log('   Fiber Layer Type:', app.mapManager.fiberLayer?.type);
             console.log('   Electric Layer Type:', app.mapManager.electricLayer?.type);
@@ -302,13 +312,27 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.log('   Electric Layer Clustering:', app.mapManager.electricLayer?.featureReduction);
             console.log('');
             console.log('📊 Data Counts:');
+
             if (app.mapManager.fiberLayer?.type === 'feature') {
-                console.log('   Fiber FeatureLayer Features:', app.mapManager.fiberLayer?.source?.length);
+                try {
+                    const fiberFeatures = await app.mapManager.fiberLayer.queryFeatures();
+                    console.log('   Fiber FeatureLayer Features (actual):', fiberFeatures.features.length);
+                    console.log('   Fiber FeatureLayer Source Length:', app.mapManager.fiberLayer.source?.length);
+                } catch (error) {
+                    console.log('   Fiber FeatureLayer query error:', error);
+                }
             } else {
                 console.log('   Fiber GraphicsLayer Graphics:', app.mapManager.fiberLayer?.graphics?.length);
             }
+
             if (app.mapManager.electricLayer?.type === 'feature') {
-                console.log('   Electric FeatureLayer Features:', app.mapManager.electricLayer?.source?.length);
+                try {
+                    const electricFeatures = await app.mapManager.electricLayer.queryFeatures();
+                    console.log('   Electric FeatureLayer Features (actual):', electricFeatures.features.length);
+                    console.log('   Electric FeatureLayer Source Length:', app.mapManager.electricLayer.source?.length);
+                } catch (error) {
+                    console.log('   Electric FeatureLayer query error:', error);
+                }
             } else {
                 console.log('   Electric GraphicsLayer Graphics:', app.mapManager.electricLayer?.graphics?.length);
             }
@@ -318,6 +342,36 @@ document.addEventListener('DOMContentLoaded', async () => {
             app.mapManager.updateTheme();
             console.log(`Manually toggled to ${isDark ? 'dark' : 'light'} theme`);
         };
+        window.debugCountTotals = async () => {
+            console.log('🔢 Count Verification:');
+
+            // Get header counter values
+            const fiberCounter = document.querySelector('.counter-item.fiber calcite-chip')?.innerText || '0';
+            const electricCounter = document.querySelector('.counter-item.electric calcite-chip')?.innerText || '0';
+            console.log(`   Header Fiber Count: ${fiberCounter}`);
+            console.log(`   Header Electric Count: ${electricCounter}`);
+
+            // Get actual feature counts
+            if (app.mapManager.fiberLayer?.type === 'feature') {
+                try {
+                    const fiberFeatures = await app.mapManager.fiberLayer.queryFeatures();
+                    console.log(`   Actual Fiber Features: ${fiberFeatures.features.length}`);
+                    console.log(`   ✅ Match: ${fiberCounter == fiberFeatures.features.length ? 'YES' : 'NO'}`);
+                } catch (error) {
+                    console.log('   Error querying fiber features:', error);
+                }
+            }
+
+            if (app.mapManager.electricLayer?.type === 'feature') {
+                try {
+                    const electricFeatures = await app.mapManager.electricLayer.queryFeatures();
+                    console.log(`   Actual Electric Features: ${electricFeatures.features.length}`);
+                    console.log(`   ✅ Match: ${electricCounter == electricFeatures.features.length ? 'YES' : 'NO'}`);
+                } catch (error) {
+                    console.log('   Error querying electric features:', error);
+                }
+            }
+        };
 
         console.log('🛠️  Debug functions available:');
         console.log('   debugTenant() - Show environment variables');
@@ -325,6 +379,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log('   debugMap() - Debug map container');
         console.log('   debugBounds() - Show map bounds and theme info');
         console.log('   debugClustering() - Show clustering configuration and data');
+        console.log('   debugCountTotals() - Verify cluster counts match header counters');
         console.log('   toggleTheme() - Manually toggle dark/light theme');
     }
 

@@ -334,10 +334,10 @@ export class MapManager {
                     labelPlacement: 'center-center'
                 }],
                 popupTemplate: {
-                    title: privacyMode ? 'Service Area' : 'Service Interruptions',
+                    title: privacyMode ? 'Service Area' : 'Fiber Offline',
                     content: privacyMode ?
-                        '{cluster_count} service interruptions in this area' :
-                        '{cluster_count} service interruptions'
+                        '{cluster_count} Fiber Offline in this area' :
+                        '{cluster_count} Fiber Offline'
                 }
             };
 
@@ -443,13 +443,29 @@ export class MapManager {
                     });
                 });
 
-                // Use applyEdits to update FeatureLayer
-                const result = await this.fiberLayer.applyEdits({
-                    deleteFeatures: this.fiberLayer.source.toArray(), // Remove existing
-                    addFeatures: features // Add new features
-                });
-                console.log(`✅ Updated FeatureLayer with ${features.length} features for clustering`);
-                console.log('ApplyEdits result:', result);
+                // Clear existing features first, then add new ones
+                try {
+                    // Step 1: Delete all existing features
+                    const existingFeatures = await this.fiberLayer.queryFeatures();
+                    if (existingFeatures.features.length > 0) {
+                        await this.fiberLayer.applyEdits({
+                            deleteFeatures: existingFeatures.features
+                        });
+                        console.log(`🗑️ Deleted ${existingFeatures.features.length} existing features`);
+                    }
+
+                    // Step 2: Add new features
+                    const result = await this.fiberLayer.applyEdits({
+                        addFeatures: features
+                    });
+                    console.log(`✅ Added ${features.length} new features for clustering`);
+                    console.log('ApplyEdits result:', result);
+                } catch (error) {
+                    console.error('Error updating FeatureLayer:', error);
+                    // Fallback: try to recreate the layer source
+                    this.fiberLayer.source.removeAll();
+                    this.fiberLayer.source.addMany(features);
+                }
             } else {
                 // GraphicsLayer approach (existing logic)
                 this.fiberLayer.removeAll();
@@ -534,13 +550,29 @@ export class MapManager {
                     });
                 });
 
-                // Use applyEdits to update FeatureLayer
-                const result = await this.electricLayer.applyEdits({
-                    deleteFeatures: this.electricLayer.source.toArray(), // Remove existing
-                    addFeatures: features // Add new features
-                });
-                console.log(`✅ Updated Electric FeatureLayer with ${features.length} features for clustering`);
-                console.log('Electric ApplyEdits result:', result);
+                // Clear existing features first, then add new ones
+                try {
+                    // Step 1: Delete all existing features
+                    const existingFeatures = await this.electricLayer.queryFeatures();
+                    if (existingFeatures.features.length > 0) {
+                        await this.electricLayer.applyEdits({
+                            deleteFeatures: existingFeatures.features
+                        });
+                        console.log(`🗑️ Deleted ${existingFeatures.features.length} existing electric features`);
+                    }
+
+                    // Step 2: Add new features
+                    const result = await this.electricLayer.applyEdits({
+                        addFeatures: features
+                    });
+                    console.log(`✅ Added ${features.length} new electric features for clustering`);
+                    console.log('Electric ApplyEdits result:', result);
+                } catch (error) {
+                    console.error('Error updating Electric FeatureLayer:', error);
+                    // Fallback: try to recreate the layer source
+                    this.electricLayer.source.removeAll();
+                    this.electricLayer.source.addMany(features);
+                }
             } else {
                 // GraphicsLayer approach (existing logic)
                 this.electricLayer.removeAll();

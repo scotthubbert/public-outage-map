@@ -2,6 +2,13 @@
 <html lang="en">
 
 <head>
+    <script>
+        // Immediate theme detection before any content loads
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('calcite-mode-dark');
+        }
+    </script>
+
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,8 +18,44 @@
     <!-- Calcite Components CSS -->
     <link rel="stylesheet" href="https://js.arcgis.com/calcite-components/3.2.1/calcite.css" />
 
-    <!-- ArcGIS CSS -->
-    <link rel="stylesheet" href="https://js.arcgis.com/4.32/esri/themes/light/main.css" />
+    <!-- ArcGIS CSS - Theme will be set by JavaScript -->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.32/esri/themes/light/main.css" data-theme="light"
+        media="(prefers-color-scheme: light)" />
+    <link rel="stylesheet" href="https://js.arcgis.com/4.32/esri/themes/dark/main.css" data-theme="dark"
+        media="(prefers-color-scheme: dark)" />
+
+    <style>
+        /* Critical theme styles that must load before content */
+        :root {
+            --status-text-color: var(--calcite-color-text-2);
+        }
+
+        .calcite-mode-dark {
+            color-scheme: dark;
+        }
+
+        /* Immediate theme-aware styles */
+        .status-counter {
+            color: var(--calcite-color-text-2);
+        }
+
+        /* Loading state colors */
+        .status-counter.loading {
+            background-color: var(--calcite-color-foreground-2);
+            border: 1px solid var(--calcite-color-border-2);
+        }
+
+        /* Status colors */
+        .status-counter.danger:not(.loading) {
+            background-color: var(--calcite-color-status-danger);
+            color: var(--calcite-color-text-inverse);
+        }
+
+        .status-counter.warning:not(.loading) {
+            background-color: var(--calcite-color-status-warning);
+            color: var(--calcite-color-text-1);
+        }
+    </style>
 </head>
 
 <body>
@@ -21,36 +64,37 @@
         <!-- Calcite Shell for layout -->
         <calcite-shell>
             <!-- Header Panel with Counter -->
-            <div slot="header">
-                <calcite-panel>
-                    <div id="counter">
-                        <calcite-loader id="loading-indicator" active></calcite-loader>
-                        <div id="counter-content" style="display: none;">
-                            <calcite-card>
-                                <div class="counter-chips">
-                                    <calcite-chip id="fiber-chip" appearance="solid" color="red" scale="l">
-                                        <calcite-icon icon="exclamation-mark-triangle" slot="icon"></calcite-icon>
-                                        <span id="fiber-count">Fiber Offline: 0</span>
-                                    </calcite-chip>
-                                    <calcite-chip id="electric-chip" appearance="solid" color="orange" scale="l">
-                                        <calcite-icon icon="lightbulb" slot="icon"></calcite-icon>
-                                        <span id="electric-count">Power Outage: 0</span>
-                                    </calcite-chip>
-                                </div>
-                            </calcite-card>
+            <div slot="header" class="app-header">
+                <div class="header-content">
+                    <!-- Left Logo Section -->
+                    <div class="header-logos">
+                        <div class="header-logo">
+                            <img id="tenant-logo" src="/logos/freedomfiber-logo.png" alt="Freedom Fiber Symbol">
+                        </div>
+                        <div class="header-logo">
+                            <img id="tenant-text-logo" src="/logos/freedomfiber-text-logo.png" alt="Freedom Fiber">
                         </div>
                     </div>
-                </calcite-panel>
+
+                    <!-- Counter Section -->
+                    <div class="counter-chips">
+                        <div id="fiber-counter" class="status-counter danger loading">
+                            <span id="fiber-count">0</span>
+                        </div>
+                        <div id="electric-counter" class="status-counter warning loading" style="display: none;">
+                            <span id="electric-count">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Logo Section (invisible, for balance) -->
+                    <div class="header-logos"></div>
+                </div>
+                <calcite-loader id="loading-indicator" active></calcite-loader>
             </div>
 
             <!-- Map Container -->
             <div id="map-container">
                 <div id="map"></div>
-
-                <!-- Logo overlay -->
-                <div id="map-logo">
-                    <img src="/logo-3.png" alt="Flash Fiber Logo">
-                </div>
 
                 <!-- Search Widget Container -->
                 <div id="search-container"></div>

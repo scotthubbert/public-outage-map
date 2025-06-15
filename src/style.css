@@ -1,9 +1,23 @@
 /* Global Styles */
 :root {
+  /* Brand colors from tenant config - keep these */
   --jwec-red: #dc2626;
   --jwec-orange: #ea580c;
   --jwec-blue: #2563eb;
   --jwec-gray: #6b7280;
+
+  /* App dimensions - keep these */
+  --app-max-width: 1440px;
+  --app-header-height: 4rem;
+}
+
+/* Base theme styles */
+html {
+  color-scheme: light dark;
+}
+
+html.calcite-mode-dark {
+  color-scheme: dark;
 }
 
 * {
@@ -14,9 +28,16 @@ html,
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
   overflow: hidden;
   font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+}
+
+/* Theme-aware background */
+body {
+  background: var(--calcite-color-background);
+  color: var(--calcite-color-text-1);
 }
 
 #app {
@@ -30,26 +51,152 @@ calcite-shell {
   width: 100vw;
   display: flex;
   flex-direction: column;
-  --calcite-color-foreground-1: #ffffff;
 }
 
 /* Header styling */
-calcite-shell [slot="header"] {
+.app-header {
+  width: 100%;
+  height: var(--app-header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  background: var(--calcite-color-foreground-1);
+  color: var(--calcite-color-text-1);
+}
+
+/* Header Layout */
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+  min-height: 40px;
+  width: 100%;
+}
+
+.header-logos {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   flex-shrink: 0;
-  z-index: 10;
+  flex-basis: 25%;
 }
 
-/* Counter Styles */
-#counter {
-  padding: 1rem;
+.header-logo {
+  flex-shrink: 0;
 }
 
+.header-logo img {
+  height: 36px;
+  width: auto;
+  max-width: 160px;
+  border-radius: 4px;
+  background-color: var(--calcite-ui-foreground-1);
+  padding: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+#tenant-text-logo {
+  height: 28px;
+  padding: 3px;
+}
+
+/* Counter container */
 .counter-chips {
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
   align-items: center;
+  gap: 16px;
+  padding: 0 4px;
   justify-content: center;
+  width: 100%;
+  flex: 1;
+}
+
+/* Status Counters */
+.status-counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 18px;
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: all 0.2s ease-in-out;
+  color: var(--calcite-color-text-2);
+}
+
+/* Set immediate colors for dark mode to prevent flash */
+.calcite-mode-dark .status-counter {
+  color: #6f7780; /* Matches Calcite dark mode text-2 */
+}
+
+/* Set immediate colors for light mode to prevent flash */
+.status-counter {
+  color: #4a4a4a; /* Matches Calcite light mode text-2 */
+}
+
+.status-counter.loading {
+  background-color: var(--calcite-color-foreground-2);
+  border: 1px solid var(--calcite-color-border-2);
+}
+
+.status-counter.danger:not(.loading) {
+  background-color: var(--calcite-color-status-danger);
+  border: 1px solid var(--calcite-color-status-danger);
+  color: var(--calcite-color-text-inverse);
+}
+
+.status-counter.danger:not(.loading) calcite-icon {
+  color: var(--calcite-color-text-inverse);
+}
+
+.status-counter.warning:not(.loading) {
+  background-color: var(--calcite-color-status-warning);
+  border: 1px solid var(--calcite-color-status-warning);
+  color: var(--calcite-color-text-1);
+}
+
+.status-counter.warning:not(.loading) calcite-icon {
+  color: var(--calcite-color-text-1);
+}
+
+/* Loading State */
+.status-counter.loading {
+  background-color: var(--calcite-color-foreground-2);
+  border: 1px solid var(--calcite-color-border-2);
+}
+
+.status-counter.loading calcite-loader {
+  --calcite-ui-foreground-1: var(--calcite-color-text-1);
+}
+
+.status-counter.loading span {
+  color: var(--calcite-color-text-2);
+}
+
+/* When power counter is hidden, ensure fiber counter is centered */
+.counter-chips:has(.status-counter:only-child) {
+  justify-content: center;
+}
+
+/* Right side spacer to balance the layout */
+.header-logos:last-child {
+  justify-content: flex-end;
+  visibility: hidden;
+  flex-basis: 25%;
+}
+
+#loading-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
 }
 
 /* Map Container */
@@ -72,27 +219,7 @@ calcite-shell [slot="header"] {
   height: 100%;
 }
 
-/* Logo Styling */
-#map-logo {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  z-index: 10;
-}
-
-#map-logo img {
-  width: 200px;
-  height: auto;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.95);
-  padding: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s ease;
-}
-
-#map-logo img:hover {
-  transform: scale(1.02);
-}
+/* Logo styling moved to header - see .header-logo above */
 
 /* Search Container */
 #search-container {
@@ -130,17 +257,6 @@ calcite-card {
   --calcite-color-border-3: #e5e7eb;
 }
 
-/* Chip Custom Colors */
-calcite-chip[color="red"] {
-  --calcite-color-brand: var(--jwec-red);
-  --calcite-color-brand-hover: #b91c1c;
-}
-
-calcite-chip[color="orange"] {
-  --calcite-color-brand: var(--jwec-orange);
-  --calcite-color-brand-hover: #c2410c;
-}
-
 /* Radio Button Styling */
 calcite-radio-button-group {
   width: 100%;
@@ -158,7 +274,9 @@ calcite-alert {
 
 /* Loading Indicator */
 calcite-loader {
-  --calcite-color-brand: var(--jwec-blue);
+  --calcite-ui-foreground-1: transparent;
+  --calcite-ui-background: transparent;
+  background: transparent;
 }
 
 /* Block Styling */
@@ -168,64 +286,92 @@ calcite-block {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .counter-chips {
-    flex-direction: column;
+  .app-header {
+    padding: 0.35rem;
+  }
+
+  .header-content {
+    min-height: 32px;
     gap: 0.5rem;
   }
 
-  #map-logo img {
-    width: 120px;
-    padding: 6px;
+  .header-logos {
+    flex-basis: 20%;
   }
 
-  #search-container {
-    width: 280px;
-    top: 10px;
-    right: 10px;
+  .header-logo img {
+    height: 32px;
+    max-width: 120px;
+    padding: 3px;
   }
 
-  calcite-shell-panel[slot="header"] {
-    --calcite-shell-panel-min-height: auto;
+  #tenant-text-logo {
+    height: 24px;
+    padding: 2px;
   }
 
-  calcite-shell-panel[slot="panel-end"] {
-    --calcite-shell-panel-width: 100vw;
+  .counter-chips {
+    flex-basis: 60%;
+    gap: 0.5rem;
   }
 
-  calcite-chip {
-    --calcite-chip-spacing-inline: 0.75rem;
+  .status-counter {
+    padding: 6px 12px;
+    font-size: 16px;
+    gap: 6px;
+  }
+
+  .status-counter calcite-icon {
+    scale: s;
   }
 }
 
 @media (max-width: 480px) {
-  #counter {
-    padding: 0.5rem;
+  .app-header {
+    padding: 0.25rem;
   }
 
-  #map-logo {
-    top: 10px;
-    left: 10px;
+  .header-content {
+    min-height: 28px;
   }
 
-  #map-logo img {
-    width: 100px;
-    padding: 4px;
+  .header-logos {
+    flex-basis: 15%;
   }
 
-  #search-container {
-    width: calc(100vw - 130px);
-    top: 8px;
-    right: 8px;
+  .header-logo img {
+    height: 28px;
+    max-width: 100px;
+  }
+
+  #tenant-text-logo {
+    height: 20px;
+  }
+
+  .counter-chips {
+    flex-basis: 70%;
+    gap: 0.35rem;
+  }
+
+  .status-counter {
+    padding: 4px 10px;
+    font-size: 14px;
+    gap: 4px;
   }
 
   .counter-chips calcite-chip {
-    scale: 0.9;
+    scale: 0.85;
+    --calcite-chip-spacing-inline: 0.25rem;
+  }
+
+  #fiber-count,
+  #electric-count {
+    font-size: 0.85rem;
   }
 }
 
 /* Print Styles */
 @media print {
-  calcite-shell-panel[slot="header"],
   calcite-action-bar,
   calcite-shell-panel[slot="panel-end"],
   #search-container {
@@ -236,7 +382,7 @@ calcite-block {
     height: 100vh !important;
   }
 
-  #map-logo img {
+  .header-logo img {
     background-color: white;
   }
 }
@@ -251,7 +397,7 @@ calcite-block {
     --calcite-color-brand: #ff6600;
   }
 
-  #map-logo img {
+  .header-logo img {
     background-color: white;
     border: 2px solid #000;
   }
@@ -259,11 +405,11 @@ calcite-block {
 
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-  #map-logo img {
+  .header-logo img {
     transition: none;
   }
 
-  #map-logo img:hover {
+  .header-logo img:hover {
     transform: none;
   }
 }
@@ -274,31 +420,42 @@ calcite-block {
     --calcite-mode: dark;
   }
 
-  calcite-shell {
-    --calcite-color-foreground-1: #1f2937;
-    --calcite-color-background: #111827;
+  body {
+    background: var(--calcite-color-background);
+  }
+
+  .app-header {
+    background: var(--calcite-color-foreground-1);
+  }
+
+  .app-header calcite-panel,
+  .app-header calcite-card,
+  .app-header calcite-loader {
+    --calcite-ui-foreground-1: transparent;
+    --calcite-ui-background: transparent;
+    background: transparent;
   }
 
   #map-container {
-    background-color: #111827;
+    background-color: var(--calcite-color-foreground-3);
   }
 
-  #map-logo img {
-    background-color: rgba(31, 41, 55, 0.95);
-    border: 1px solid rgba(75, 85, 99, 0.5);
+  .header-logo img {
+    background-color: var(--calcite-color-foreground-1);
+    border: 1px solid var(--calcite-color-border-2);
   }
 
   calcite-shell-panel[slot="header"] {
-    border-bottom-color: #374151;
+    border-bottom-color: var(--calcite-color-border-2);
   }
 
   calcite-shell-panel[slot="panel-end"] {
-    border-left-color: #374151;
+    border-left-color: var(--calcite-color-border-2);
   }
 
   calcite-action-bar {
-    --calcite-color-background: #1f2937;
-    --calcite-color-foreground-1: #1f2937;
+    --calcite-color-background: var(--calcite-color-foreground-1);
+    --calcite-color-foreground-1: var(--calcite-color-foreground-1);
   }
 
   #search-container .esri-search {
@@ -311,31 +468,48 @@ calcite-block {
   --calcite-mode: dark;
 }
 
-.calcite-mode-dark calcite-shell {
-  --calcite-color-foreground-1: #1f2937;
-  --calcite-color-background: #111827;
+.calcite-mode-dark body {
+  background: var(--calcite-color-background);
+}
+
+.calcite-mode-dark .app-header {
+  background: var(--calcite-color-foreground-1);
+}
+
+.calcite-mode-dark .app-header calcite-panel,
+.calcite-mode-dark .app-header calcite-card,
+.calcite-mode-dark .app-header calcite-loader {
+  --calcite-ui-foreground-1: transparent;
+  --calcite-ui-background: transparent;
+  background: transparent;
 }
 
 .calcite-mode-dark #map-container {
-  background-color: #111827;
+  background-color: var(--calcite-color-foreground-3);
 }
 
-.calcite-mode-dark #map-logo img {
-  background-color: rgba(31, 41, 55, 0.95);
-  border: 1px solid rgba(75, 85, 99, 0.5);
+.calcite-mode-dark .header-logo img {
+  background-color: var(--calcite-color-foreground-1);
+  border: 1px solid var(--calcite-color-border-2);
 }
 
 .calcite-mode-dark calcite-shell-panel[slot="header"] {
-  border-bottom-color: #374151;
+  border-bottom-color: var(--calcite-color-border-2);
 }
 
 .calcite-mode-dark calcite-shell-panel[slot="panel-end"] {
-  border-left-color: #374151;
+  border-left-color: var(--calcite-color-border-2);
 }
 
 .calcite-mode-dark calcite-action-bar {
-  --calcite-color-background: #1f2937;
-  --calcite-color-foreground-1: #1f2937;
+  --calcite-color-background: var(--calcite-color-foreground-1);
+  --calcite-color-foreground-1: var(--calcite-color-foreground-1);
+}
+
+.calcite-mode-dark #tenant-text-logo {
+  background-color: transparent;
+  border: none;
+  filter: brightness(0.9) invert(1);
 }
 
 /* Focus Styles for Accessibility */
@@ -349,15 +523,120 @@ calcite-radio-button:focus {
 
 /* Animation for loading states */
 @keyframes pulse {
-  0%,
-  100% {
+  0% {
     opacity: 1;
   }
   50% {
     opacity: 0.5;
   }
+  100% {
+    opacity: 1;
+  }
 }
 
-.loading {
+.pulse {
   animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Ensure all calcite components in header are transparent */
+.app-header calcite-panel,
+.app-header calcite-card {
+  --calcite-ui-foreground-1: transparent;
+  --calcite-ui-background: transparent;
+  background: transparent;
+}
+
+/* Counter Cards */
+.counter-card {
+  --calcite-ui-foreground-1: var(--calcite-ui-background);
+  --calcite-ui-background: transparent;
+  box-shadow: none;
+}
+
+.counter-card calcite-card {
+  --calcite-ui-foreground-1: var(--calcite-ui-background);
+  --calcite-ui-background: transparent;
+  box-shadow: none;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .counter-card,
+  .counter-card calcite-card {
+    --calcite-ui-foreground-1: transparent;
+    --calcite-ui-background: transparent;
+    background: transparent !important;
+  }
+}
+
+/* Manual dark mode class support */
+.calcite-mode-dark .counter-card,
+.calcite-mode-dark .counter-card calcite-card {
+  --calcite-ui-foreground-1: transparent;
+  --calcite-ui-background: transparent;
+  background: transparent !important;
+}
+
+.logo {
+  height: 100%;
+  max-height: calc(var(--app-header-height) - 1rem);
+  width: auto;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.text-logo {
+  height: 100%;
+  max-height: calc(var(--app-header-height) - 1.5rem);
+  width: auto;
+  margin-left: 0.5rem;
+}
+
+/* Map container takes remaining height */
+#viewDiv {
+  padding: 0;
+  margin: 0;
+  height: calc(100vh - var(--app-header-height));
+  width: 100%;
+}
+
+/* Counter Loading State */
+.counter-loading-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--calcite-ui-text-1);
+}
+
+.counter-loading-item calcite-loader {
+  --calcite-ui-foreground-1: var(--calcite-ui-text-1);
+  --calcite-ui-background: transparent;
+}
+
+/* Responsive adjustments for loading state */
+@media (max-width: 768px) {
+  .counter-loading-item {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .counter-loading-item {
+    padding: 0.25rem 0.35rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Ensure smooth theme transitions */
+* {
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
 }
