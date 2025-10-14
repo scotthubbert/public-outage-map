@@ -7,8 +7,8 @@ Thank you for your interest in contributing! This document provides guidelines f
 1. **Fork the repository** on GitHub
 2. **Clone your fork** locally:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/mapbox-js.git
-   cd mapbox-js
+   git clone https://github.com/YOUR_USERNAME/public-outage-map.git
+   cd public-outage-map
    ```
 3. **Install dependencies**:
    ```bash
@@ -151,7 +151,7 @@ Some ideas:
 ## Project Structure
 
 ```
-mapbox-js/
+public-outage-map/
 ├── index.html          # Main entry point
 ├── config.js           # ISP configurations
 ├── app.js              # Main application logic

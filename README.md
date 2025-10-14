@@ -30,7 +30,7 @@ A lightweight, multi-ISP web-based map application for displaying service outage
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd mapbox-js
+cd public-outage-map
 
 # Install dependencies
 npm install
@@ -334,7 +334,7 @@ This application is provided as-is for use by ISPs to display outage information
 ### Project Structure
 
 ```
-mapbox-js/
+public-outage-map/
 ├── index.html          # Main HTML file
 ├── config.js           # ISP configurations
 ├── app.js              # Main application logic

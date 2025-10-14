@@ -6,7 +6,7 @@ Get your ISP Outage Map up and running in 5 minutes!
 
 ```bash
 # Clone and navigate to the project
-cd mapbox-js
+cd public-outage-map
 
 # Install dependencies
 npm install
