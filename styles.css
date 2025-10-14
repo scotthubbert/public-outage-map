@@ -1,0 +1,886 @@
+/* CSS Variables for theming */
+:root {
+  /* ISP Brand Colors (set by config) */
+  --primary-color: #0066cc;
+  --secondary-color: #004499;
+
+  /* Light mode colors */
+  --bg-color: #ffffff;
+  --text-color: #1a1a1a;
+  --border-color: #e5e7eb;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --panel-bg: #ffffff;
+  --hover-bg: #f3f4f6;
+  --input-bg: #ffffff;
+
+  /* Status colors */
+  --critical-color: #dc2626;
+  --major-color: #ea580c;
+  --minor-color: #f59e0b;
+  --resolved-color: #10b981;
+}
+
+/* Dark mode colors */
+body.dark-mode {
+  --bg-color: #1f2937;
+  --text-color: #f3f4f6;
+  --border-color: #374151;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --panel-bg: #111827;
+  --hover-bg: #374151;
+  --input-bg: #1f2937;
+}
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* App container */
+#app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Header */
+#header {
+  background-color: var(--panel-bg);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 2px 4px var(--shadow-color);
+  z-index: 1001;
+  transition: all 0.3s ease;
+}
+
+.header-content {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  max-width: 100%;
+  gap: 1rem;
+}
+
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.branding img {
+  height: 32px;
+  width: auto;
+}
+
+.branding h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.header-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.offline-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.offline-count {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--critical-color);
+  line-height: 1;
+}
+
+.offline-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  justify-self: end;
+}
+
+.status-indicator {
+  font-size: 0.875rem;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+/* Search toggle button (hidden on desktop, shown on mobile) */
+.search-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease;
+}
+
+.search-toggle:hover {
+  background-color: var(--hover-bg);
+  border-color: var(--primary-color);
+}
+
+.search-toggle svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text-color);
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--hover-bg);
+  border-color: var(--primary-color);
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text-color);
+}
+
+.dark-mode .sun-icon {
+  display: none;
+}
+
+.dark-mode .moon-icon {
+  display: block;
+}
+
+body:not(.dark-mode) .sun-icon {
+  display: block;
+}
+
+body:not(.dark-mode) .moon-icon {
+  display: none;
+}
+
+/* Map container */
+#map {
+  flex: 1;
+  width: 100%;
+  position: relative;
+}
+
+/* Mapbox Geocoder custom styles */
+/* Note: Mapbox Geocoder has no built-in dark mode, so we style it manually */
+
+/* Main geocoder container */
+.mapboxgl-ctrl-geocoder {
+  background-color: var(--panel-bg) !important;
+  box-shadow: 0 2px 4px var(--shadow-color) !important;
+  border-radius: 0.5rem !important;
+  min-width: 300px;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* Dark mode specific overrides */
+.dark-mode .mapboxgl-ctrl-geocoder {
+  background-color: #111827 !important;
+  border-color: #374151 !important;
+}
+
+/* Input field */
+.mapboxgl-ctrl-geocoder--input {
+  background-color: var(--input-bg) !important;
+  color: var(--text-color) !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.875rem !important;
+}
+
+.dark-mode .mapboxgl-ctrl-geocoder--input {
+  background-color: #1f2937 !important;
+  color: #f3f4f6 !important;
+}
+
+.mapboxgl-ctrl-geocoder--input::placeholder {
+  color: var(--text-color) !important;
+  opacity: 0.5 !important;
+}
+
+.dark-mode .mapboxgl-ctrl-geocoder--input::placeholder {
+  color: #9ca3af !important;
+}
+
+/* Search icon */
+.mapboxgl-ctrl-geocoder--icon {
+  fill: var(--text-color) !important;
+}
+
+.dark-mode .mapboxgl-ctrl-geocoder--icon {
+  fill: #f3f4f6 !important;
+}
+
+.mapboxgl-ctrl-geocoder--icon-search {
+  fill: var(--text-color) !important;
+}
+
+.dark-mode .mapboxgl-ctrl-geocoder--icon-search {
+  fill: #f3f4f6 !important;
+}
+
+.mapboxgl-ctrl-geocoder--icon-close {
+  fill: var(--text-color) !important;
+  opacity: 0.7 !important;
+}
+
+.dark-mode .mapboxgl-ctrl-geocoder--icon-close {
+  fill: #f3f4f6 !important;
+}
+
+.mapboxgl-ctrl-geocoder--icon-loading {
+  fill: var(--text-color) !important;
+}
+
+.dark-mode .mapboxgl-ctrl-geocoder--icon-loading {
+  fill: #f3f4f6 !important;
+}
+
+/* Buttons */
+.mapboxgl-ctrl-geocoder--button {
+  background-color: transparent !important;
+}
+
+.mapboxgl-ctrl-geocoder--button:hover {
+  background-color: var(--hover-bg) !important;
+}
+
+/* Suggestions dropdown */
+.mapboxgl-ctrl-geocoder--suggestions {
+  background-color: var(--panel-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-top: none !important;
+  border-radius: 0 0 0.5rem 0.5rem !important;
+  box-shadow: 0 2px 4px var(--shadow-color) !important;
+  margin-top: 0 !important;
+}
+
+.dark-mode .mapboxgl-ctrl-geocoder--suggestions {
+  background-color: #111827 !important;
+  border-color: #374151 !important;
+}
+
+/* Force wrapper styles */
+.mapboxgl-ctrl-geocoder .suggestions-wrapper,
+.mapboxgl-ctrl-geocoder .suggestions {
+  background-color: var(--panel-bg) !important;
+}
+
+.dark-mode .mapboxgl-ctrl-geocoder .suggestions-wrapper,
+.dark-mode .mapboxgl-ctrl-geocoder .suggestions {
+  background-color: #111827 !important;
+}
+
+/* Individual suggestions */
+.mapboxgl-ctrl-geocoder--suggestion {
+  background-color: var(--panel-bg) !important;
+  color: var(--text-color) !important;
+  border-top: 1px solid var(--border-color) !important;
+}
+
+.dark-mode .mapboxgl-ctrl-geocoder--suggestion {
+  background-color: #111827 !important;
+  color: #f3f4f6 !important;
+  border-top-color: #374151 !important;
+}
+
+.mapboxgl-ctrl-geocoder--suggestion:first-child {
+  border-top: none !important;
+}
+
+.mapboxgl-ctrl-geocoder--suggestion:hover,
+.mapboxgl-ctrl-geocoder--suggestion.active {
+  background-color: var(--hover-bg) !important;
+  color: var(--text-color) !important;
+}
+
+.dark-mode .mapboxgl-ctrl-geocoder--suggestion:hover,
+.dark-mode .mapboxgl-ctrl-geocoder--suggestion.active {
+  background-color: #374151 !important;
+  color: #f3f4f6 !important;
+}
+
+/* Suggestion text */
+.mapboxgl-ctrl-geocoder--suggestion-title {
+  color: var(--text-color) !important;
+  font-weight: 600 !important;
+}
+
+.dark-mode .mapboxgl-ctrl-geocoder--suggestion-title {
+  color: #f3f4f6 !important;
+}
+
+.mapboxgl-ctrl-geocoder--suggestion-address {
+  color: var(--text-color) !important;
+  opacity: 0.7 !important;
+}
+
+.dark-mode .mapboxgl-ctrl-geocoder--suggestion-address {
+  color: #d1d5db !important;
+}
+
+/* Powered by Mapbox footer */
+.mapboxgl-ctrl-geocoder--powered-by {
+  background-color: var(--panel-bg) !important;
+  border-top: 1px solid var(--border-color) !important;
+}
+
+.dark-mode .mapboxgl-ctrl-geocoder--powered-by {
+  background-color: #111827 !important;
+  border-top-color: #374151 !important;
+}
+
+.mapboxgl-ctrl-geocoder--powered-by a {
+  color: var(--text-color) !important;
+  opacity: 0.6 !important;
+  text-decoration: none !important;
+}
+
+.dark-mode .mapboxgl-ctrl-geocoder--powered-by a {
+  color: #9ca3af !important;
+}
+
+.mapboxgl-ctrl-geocoder--powered-by a:hover {
+  opacity: 0.8 !important;
+}
+
+/* Aggressive dark mode catch-all for geocoder */
+/* Step 1: Make everything transparent */
+.dark-mode .mapboxgl-ctrl-geocoder *:not(input):not(svg):not(path) {
+  background-color: transparent !important;
+}
+
+/* Step 2: Set specific container backgrounds */
+.dark-mode .mapboxgl-ctrl-geocoder {
+  background-color: #111827 !important;
+}
+
+.dark-mode .mapboxgl-ctrl-geocoder--input {
+  background-color: #1f2937 !important;
+}
+
+.dark-mode .mapboxgl-ctrl-geocoder--suggestions,
+.dark-mode .mapboxgl-ctrl-geocoder ul,
+.dark-mode .mapboxgl-ctrl-geocoder .suggestions-wrapper {
+  background-color: #111827 !important;
+}
+
+/* Step 3: Set suggestion item backgrounds */
+.dark-mode .mapboxgl-ctrl-geocoder--suggestion,
+.dark-mode .mapboxgl-ctrl-geocoder li {
+  background-color: #111827 !important;
+  color: #f3f4f6 !important;
+}
+
+/* Step 4: Hover states */
+.dark-mode .mapboxgl-ctrl-geocoder--suggestion:hover,
+.dark-mode .mapboxgl-ctrl-geocoder li:hover,
+.dark-mode .mapboxgl-ctrl-geocoder--suggestion.active {
+  background-color: #374151 !important;
+}
+
+/* Step 5: Footer */
+.dark-mode .mapboxgl-ctrl-geocoder--powered-by {
+  background-color: #111827 !important;
+}
+
+/* Navigation controls */
+.mapboxgl-ctrl-group {
+  background-color: var(--panel-bg) !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 1px 2px var(--shadow-color) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.dark-mode .mapboxgl-ctrl-group {
+  background-color: #111827 !important;
+  border-color: #374151 !important;
+}
+
+.mapboxgl-ctrl-group button {
+  background-color: var(--panel-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark-mode .mapboxgl-ctrl-group button {
+  background-color: #111827 !important;
+  border-color: #374151 !important;
+}
+
+.mapboxgl-ctrl-group button:hover {
+  background-color: var(--hover-bg) !important;
+}
+
+.dark-mode .mapboxgl-ctrl-group button:hover {
+  background-color: #374151 !important;
+}
+
+/* Dark mode - make sure button icons/text are visible */
+.dark-mode .mapboxgl-ctrl-icon {
+  filter: invert(1);
+}
+
+.dark-mode .mapboxgl-ctrl-compass .mapboxgl-ctrl-icon {
+  filter: none;
+}
+
+/* Legend */
+.legend {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  background-color: var(--panel-bg);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  z-index: 1000;
+  min-width: 180px;
+  transition: all 0.3s ease;
+}
+
+.legend h3 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.legend-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--panel-bg);
+  box-shadow: 0 0 0 1px var(--border-color);
+}
+
+.legend-color.offline {
+  background-color: var(--critical-color);
+}
+
+.legend-color.cluster {
+  background-color: var(--critical-color);
+}
+
+.legend-note {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.legend-note small {
+  font-size: 0.875rem;
+}
+
+#subscriber-count {
+  color: var(--critical-color);
+  font-weight: 700;
+}
+
+/* Outage Info Panel */
+.outage-info {
+  position: absolute;
+  top: 80px;
+  right: 30px;
+  background-color: var(--panel-bg);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  z-index: 1000;
+  min-width: 320px;
+  max-width: 400px;
+  transition: all 0.3s ease;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.outage-info h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.outage-info .close-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-color);
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+  line-height: 1;
+  padding: 0.25rem;
+}
+
+.outage-info .close-btn:hover {
+  opacity: 1;
+}
+
+#outage-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#outage-content p {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+#outage-content strong {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+#outage-content span {
+  color: var(--text-color);
+  opacity: 0.9;
+}
+
+/* Status badge */
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-badge.critical {
+  background-color: var(--critical-color);
+  color: white;
+}
+
+.status-badge.major {
+  background-color: var(--major-color);
+  color: white;
+}
+
+.status-badge.minor {
+  background-color: var(--minor-color);
+  color: white;
+}
+
+.status-badge.resolved {
+  background-color: var(--resolved-color);
+  color: white;
+}
+
+/* Loading spinner */
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  z-index: 2000;
+  background-color: var(--panel-bg);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading p {
+  font-size: 0.875rem;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+/* Error message */
+.error-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--panel-bg);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  text-align: center;
+  max-width: 400px;
+}
+
+.error-message h3 {
+  color: var(--critical-color);
+  margin-bottom: 1rem;
+}
+
+.error-message p {
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  #header {
+    position: relative;
+  }
+
+  .header-content {
+    padding: 0.5rem 0.75rem;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.75rem;
+  }
+
+  .branding {
+    gap: 0.5rem;
+  }
+
+  .branding img {
+    height: 24px;
+  }
+
+  .branding h1 {
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+
+  .header-center {
+    order: 0;
+    justify-content: flex-end;
+  }
+
+  .offline-counter {
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: baseline;
+  }
+
+  .offline-count {
+    font-size: 1.5rem;
+  }
+
+  .offline-label {
+    font-size: 0.75rem;
+  }
+
+  .header-controls {
+    display: flex;
+    justify-self: end;
+    gap: 0.5rem;
+  }
+
+  .status-indicator {
+    display: none;
+  }
+
+  /* Show search toggle button on mobile */
+  .search-toggle {
+    display: flex;
+  }
+
+  /* Move geocoder below header on mobile and hide by default */
+  .mapboxgl-ctrl-top-left {
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100%;
+    margin: 0 !important;
+  }
+
+  .mapboxgl-ctrl-top-left .mapboxgl-ctrl {
+    margin: 0 !important;
+  }
+
+  .mapboxgl-ctrl-geocoder {
+    position: fixed !important;
+    top: 60px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: calc(100% - 1.5rem) !important;
+    min-width: auto !important;
+    max-width: none !important;
+    margin: 0 0.75rem !important;
+    transform: translateY(-150%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1003 !important;
+  }
+
+  /* Show geocoder when expanded */
+  .mapboxgl-ctrl-geocoder.expanded {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  /* Ensure suggestions dropdown is visible */
+  .mapboxgl-ctrl-geocoder--suggestions {
+    z-index: 1004 !important;
+  }
+
+  /* Make map controls smaller */
+  .mapboxgl-ctrl-top-right {
+    top: 60px !important;
+  }
+
+  .mapboxgl-ctrl-group button {
+    width: 29px !important;
+    height: 29px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-content {
+    padding: 0.375rem 0.5rem;
+  }
+
+  .branding img {
+    display: none;
+  }
+
+  .branding h1 {
+    font-size: 0.75rem;
+  }
+
+  .offline-count {
+    font-size: 1.25rem;
+  }
+
+  .offline-label {
+    font-size: 0.625rem;
+  }
+
+  .search-toggle {
+    width: 32px;
+    height: 32px;
+    padding: 0.375rem;
+  }
+
+  .search-toggle svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Even tighter header */
+  .mapboxgl-ctrl-geocoder {
+    top: 45px !important;
+    width: calc(100% - 1rem) !important;
+    margin: 0 0.5rem !important;
+  }
+
+  .mapboxgl-ctrl-top-right {
+    top: 45px !important;
+  }
+}
+
+/* Accessibility improvements */
+button:focus,
+a:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  #header,
+  .theme-toggle,
+  .mapboxgl-ctrl-group,
+  .mapboxgl-ctrl-geocoder {
+    display: none;
+  }
+
+  #map {
+    height: 100vh;
+  }
+}

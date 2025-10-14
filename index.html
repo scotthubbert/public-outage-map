@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Freedom Fiber Outage Map</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://freedomfiber.fiberoms.cloud/logo.ico">
+
+    <!-- Mapbox GL JS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.js"></script>
+
+    <!-- Mapbox Geocoder -->
+    <script
+        src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.1.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.1.0/mapbox-gl-geocoder.css"
+        type="text/css">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Header with ISP branding -->
+        <header id="header">
+            <div class="header-content">
+                <div class="branding">
+                    <img id="isp-logo" src="" alt="ISP Logo" style="display: none;">
+                    <h1 id="isp-name">Freedom Fiber Outage Map</h1>
+                </div>
+                <div class="header-center">
+                    <div class="offline-counter">
+                        <span class="offline-count" id="subscriber-count">0</span>
+                        <span class="offline-label">Offline</span>
+                    </div>
+                </div>
+                <div class="header-controls">
+                    <button id="search-toggle" class="search-toggle" aria-label="Toggle search">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                    <div class="status-indicator">
+                        <span id="last-update">Last updated: --</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Map Container -->
+        <div id="map"></div>
+
+        <!-- Legend removed - counter moved to header -->
+
+        <!-- Info Panel removed for public-facing map -->
+        <!-- Individual subscriber details are not displayed to protect privacy -->
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading outage data...</p>
+        </div>
+    </div>
+
+    <!-- Configuration -->
+    <script src="config.js"></script>
+    <!-- Utilities -->
+    <script src="utils.js"></script>
+    <!-- Main Application -->
+    <script src="app.js"></script>
+</body>
+
+</html>
