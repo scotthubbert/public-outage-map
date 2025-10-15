@@ -29,10 +29,10 @@ const CONFIG = {
                 zoom: 12,
                 minZoom: 3,
                 maxZoom: 13,
-                // Max bounds to limit panning [SW, NE] - Columbus MS to Town Creek AL area
+                // Max bounds to limit panning [SW, NE] - tighter around actual service area
                 maxBounds: [
-                    [-89.0, 33.0], // Southwest coordinates (Columbus MS area)
-                    [-86.8, 35.2]  // Northeast coordinates (Town Creek AL area)
+                    [-88.5, 33.5], // Southwest coordinates (tighter bounds)
+                    [-87.2, 34.8]  // Northeast coordinates (tighter bounds)
                 ],
                 // Map styles for light and dark modes
                 styleLight: 'mapbox://styles/shubbert/clrxt6zz1015s01p16n6b5idi',
