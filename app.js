@@ -172,7 +172,7 @@ function initializeMap() {
     if (activeISP.map.maxBounds) {
         map.fitBounds(activeISP.map.maxBounds, {
             padding: 0, // No padding for tighter fit
-            maxZoom: 13 // Force it to zoom in more
+            maxZoom: activeISP.map.zoom || 9 // Use configured zoom level
         });
     } else {
         // Fallback to center/zoom if no bounds are defined
@@ -271,7 +271,7 @@ class HomeControl {
             if (activeISP.map.maxBounds) {
                 this._map.fitBounds(activeISP.map.maxBounds, {
                     padding: 0,
-                    maxZoom: 13,
+                    maxZoom: activeISP.map.zoom || 9,
                     duration: 1000
                 });
             } else {

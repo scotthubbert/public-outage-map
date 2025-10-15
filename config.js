@@ -26,7 +26,7 @@ const CONFIG = {
                 // Columbus MS: 33.4957, -88.4273
                 // Town Creek AL: 34.6795, -87.4064
                 center: [-87.9169, 34.0876], // Center point between the two cities
-                zoom: 8,
+                zoom: 12,
                 minZoom: 3,
                 maxZoom: 13,
                 // Max bounds to limit panning [SW, NE] - Columbus MS to Town Creek AL area
