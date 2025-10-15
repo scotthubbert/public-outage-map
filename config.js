@@ -26,14 +26,14 @@ const CONFIG = {
                 // Columbus MS: 33.4957, -88.4273
                 // Town Creek AL: 34.6795, -87.4064
                 center: [-87.9169, 34.0876], // Center point between the two cities
-                zoom: 9,
-                minZoom: 3,
+                zoom: 8,
+                minZoom: 7,
                 maxZoom: 13,
                 // Max bounds to limit panning [SW, NE] - expanded for better zoom out
-                maxBounds: [
-                    [-90.0, 32.0], // Southwest coordinates (expanded)
-                    [-85.0, 36.0]  // Northeast coordinates (expanded)
-                ],
+                // maxBounds: [
+                //     [-90.0, 32.0], // Southwest coordinates (expanded)
+                //     [-85.0, 36.0]  // Northeast coordinates (expanded)
+                // ],
                 // Map styles for light and dark modes
                 styleLight: 'mapbox://styles/shubbert/clrxt6zz1015s01p16n6b5idi',
                 styleDark: 'mapbox://styles/shubbert/cm53iohp000j301s25zzkeqhg'
