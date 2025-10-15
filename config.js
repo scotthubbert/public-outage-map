@@ -220,8 +220,8 @@ const CONFIG = {
 };
 
 // Export the active configuration
-const activeISP = CONFIG.isps[CONFIG.activeConfig];
-const mapboxToken = CONFIG.mapbox.accessToken;
+export const activeISP = CONFIG.isps[CONFIG.activeConfig];
+export const mapboxToken = CONFIG.mapbox.accessToken;
 
 // Validate configuration
 if (!activeISP) {

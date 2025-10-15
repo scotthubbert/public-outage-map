@@ -1,4 +1,5 @@
 // Main application logic for the ISP Outage Map
+import { activeISP, mapboxToken } from './config.js';
 
 // Global variables
 let map = null;
