@@ -201,7 +201,7 @@ function getFeatureCenter(feature) {
 }
 
 // Format number with commas
-function formatNumber(num) {
+export function formatNumber(num) {
     if (num === null || num === undefined) return '0';
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }

@@ -1,5 +1,6 @@
 // Main application logic for the ISP Outage Map
 import { activeISP, mapboxToken } from './config.js';
+import { formatNumber } from './utils.js';
 
 // Global variables
 let map = null;
@@ -514,12 +515,8 @@ function processSubscriberData(data, count) {
 // Update subscriber count in legend
 function updateSubscriberCount(count) {
     const countElement = document.getElementById('subscriber-count');
-    console.log('🔢 Updating subscriber count:', count, 'Element found:', !!countElement);
     if (countElement) {
         countElement.textContent = formatNumber(count);
-        console.log('✅ Counter updated to:', formatNumber(count));
-    } else {
-        console.error('❌ Could not find subscriber-count element');
     }
 }
 
@@ -591,7 +588,6 @@ function loadDemoData() {
 
     subscribersData = demoFeatures;
     updateMap();
-    console.log('📊 About to update counter with', demoFeatures.length, 'subscribers');
     updateSubscriberCount(demoFeatures.length);
     updateLastUpdateTime();
 
