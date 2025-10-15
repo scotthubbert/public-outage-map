@@ -26,13 +26,13 @@ const CONFIG = {
                 // Columbus MS: 33.4957, -88.4273
                 // Town Creek AL: 34.6795, -87.4064
                 center: [-87.9169, 34.0876], // Center point between the two cities
-                zoom: 9,
+                zoom: 8,
                 minZoom: 3,
                 maxZoom: 13,
-                // Max bounds to limit panning [SW, NE] - expanded for better zoom out
+                // Max bounds to limit panning [SW, NE] - Columbus MS to Town Creek AL area
                 maxBounds: [
-                    [-92.0, 31.0], // Southwest coordinates (expanded)
-                    [-84.0, 37.0]  // Northeast coordinates (expanded)
+                    [-89.0, 33.0], // Southwest coordinates (Columbus MS area)
+                    [-86.8, 35.2]  // Northeast coordinates (Town Creek AL area)
                 ],
                 // Map styles for light and dark modes
                 styleLight: 'mapbox://styles/shubbert/clrxt6zz1015s01p16n6b5idi',
@@ -106,8 +106,8 @@ const CONFIG = {
 
             map: {
                 center: [-74.0060, 40.7128], // New York City
-                zoom: 10,
-                minZoom: 8,
+                zoom: 8,
+                minZoom: 6,
                 maxZoom: 18,
                 // Map styles for light and dark modes
                 styleLight: 'mapbox://styles/mapbox/streets-v12',
