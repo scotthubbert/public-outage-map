@@ -157,6 +157,8 @@ function initializeMap() {
     const mapOptions = {
         container: 'map',
         style: mapStyle,
+        center: activeISP.map.center,
+        zoom: activeISP.map.zoom,
         minZoom: activeISP.map.minZoom || 2,
         maxZoom: activeISP.map.maxZoom || 20
     };
@@ -167,18 +169,6 @@ function initializeMap() {
     }
 
     map = new mapboxgl.Map(mapOptions);
-
-    // Fit map to bounds instead of using center/zoom
-    if (activeISP.map.maxBounds) {
-        map.fitBounds(activeISP.map.maxBounds, {
-            padding: 0, // No padding for tighter fit
-            maxZoom: activeISP.map.zoom || 9 // Use configured zoom level
-        });
-    } else {
-        // Fallback to center/zoom if no bounds are defined
-        map.setCenter(activeISP.map.center);
-        map.setZoom(activeISP.map.zoom);
-    }
 
 
     // Initialize geocoder (search)
@@ -268,19 +258,11 @@ class HomeControl {
 
         // Add click event to reset map to initial position
         homeButton.addEventListener('click', () => {
-            if (activeISP.map.maxBounds) {
-                this._map.fitBounds(activeISP.map.maxBounds, {
-                    padding: 0,
-                    maxZoom: activeISP.map.zoom || 9,
-                    duration: 1000
-                });
-            } else {
-                this._map.flyTo({
-                    center: activeISP.map.center,
-                    zoom: activeISP.map.zoom,
-                    duration: 1000
-                });
-            }
+            this._map.flyTo({
+                center: activeISP.map.center,
+                zoom: activeISP.map.zoom,
+                duration: 1000
+            });
         });
 
         this._container.appendChild(homeButton);
