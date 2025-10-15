@@ -171,7 +171,7 @@ function initializeMap() {
     // Fit map to bounds instead of using center/zoom
     if (activeISP.map.maxBounds) {
         map.fitBounds(activeISP.map.maxBounds, {
-            padding: 10, // Add some padding around the bounds
+            padding: 0, // No padding for tighter fit
             maxZoom: 11 // Force it to zoom in more
         });
     } else {
@@ -270,7 +270,7 @@ class HomeControl {
         homeButton.addEventListener('click', () => {
             if (activeISP.map.maxBounds) {
                 this._map.fitBounds(activeISP.map.maxBounds, {
-                    padding: 10,
+                    padding: 0,
                     maxZoom: 11,
                     duration: 1000
                 });
