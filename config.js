@@ -27,12 +27,12 @@ const CONFIG = {
                 // Town Creek AL: 34.6795, -87.4064
                 center: [-87.9169, 34.0876], // Center point between the two cities
                 zoom: 9,
-                minZoom: 6,
+                minZoom: 3,
                 maxZoom: 13,
-                // Max bounds to limit panning [SW, NE]
+                // Max bounds to limit panning [SW, NE] - expanded for better zoom out
                 maxBounds: [
-                    [-89.0, 33.0], // Southwest coordinates
-                    [-86.8, 35.2]  // Northeast coordinates
+                    [-92.0, 31.0], // Southwest coordinates (expanded)
+                    [-84.0, 37.0]  // Northeast coordinates (expanded)
                 ],
                 // Map styles for light and dark modes
                 styleLight: 'mapbox://styles/shubbert/clrxt6zz1015s01p16n6b5idi',
