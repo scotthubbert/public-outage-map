@@ -35,11 +35,14 @@ export default defineConfig({
         // Chunk size warnings
         chunkSizeWarningLimit: 1000,
         rollupOptions: {
+            external: [
+                // External dependencies that are loaded via CDN
+                'mapbox-gl',
+                '@supabase/supabase-js'
+            ],
             output: {
                 // Manual chunk splitting for better caching
-                manualChunks: {
-                    'mapbox': ['mapbox-gl']
-                }
+                manualChunks: {}
             }
         }
     },
