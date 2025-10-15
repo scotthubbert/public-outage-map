@@ -163,12 +163,28 @@ function initializeMap() {
         maxZoom: activeISP.map.maxZoom || 20
     };
 
+    console.log('🗺️ Map initialization:', {
+        center: activeISP.map.center,
+        zoom: activeISP.map.zoom,
+        minZoom: activeISP.map.minZoom,
+        maxZoom: activeISP.map.maxZoom,
+        maxBounds: activeISP.map.maxBounds
+    });
+
     // Add max bounds if configured (restricts panning area)
     if (activeISP.map.maxBounds) {
         mapOptions.maxBounds = activeISP.map.maxBounds;
+        console.log('📍 Max bounds applied:', activeISP.map.maxBounds);
+    } else {
+        console.log('📍 No max bounds configured');
     }
 
     map = new mapboxgl.Map(mapOptions);
+
+    // Log the actual zoom after map creation
+    map.on('load', () => {
+        console.log('✅ Map loaded - actual zoom level:', map.getZoom());
+    });
 
 
     // Initialize geocoder (search)
